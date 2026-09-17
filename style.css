@@ -567,6 +567,122 @@ section.dark p{ color: rgba(255,255,255,.78); }
   .cta-band{ padding: 32px; }
 }
 
+/* ---------- Anniversary celebration ---------- */
+.anniv-badge{
+  display:inline-flex;
+  align-items:center;
+  gap:.35em;
+  background: var(--bg-alt);
+  color: var(--purple-700);
+  border: 1px solid var(--line-strong);
+  border-radius: 999px;
+  padding: 6px 14px;
+  font-size: .74rem;
+  font-weight: 800;
+  white-space: nowrap;
+  animation: annivPulse 2.4s ease-in-out infinite;
+}
+@keyframes annivPulse{
+  0%,100%{ transform: scale(1); }
+  50%{ transform: scale(1.06); }
+}
+@media (max-width: 640px){
+  .anniv-badge{ display:none; }
+}
+
+.anniv-overlay{
+  position: fixed;
+  inset: 0;
+  z-index: 999;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.anniv-balloon{
+  position:absolute;
+  bottom: -160px;
+  width: 44px;
+  height: 56px;
+  border-radius: 50% 50% 50% 50% / 58% 58% 42% 42%;
+  opacity: .92;
+  animation-name: annivFloat;
+  animation-timing-function: ease-in;
+  animation-fill-mode: forwards;
+}
+.anniv-balloon::after{
+  content:"";
+  position:absolute;
+  left:50%;
+  top:100%;
+  width:1px;
+  height:54px;
+  background: rgba(37,16,66,.3);
+  transform: translateX(-50%);
+}
+@keyframes annivFloat{
+  0%{ transform: translateY(0) translateX(0) rotate(0deg); opacity:.95; }
+  85%{ opacity:.9; }
+  100%{ transform: translateY(-115vh) translateX(var(--drift, 40px)) rotate(8deg); opacity:0; }
+}
+
+.anniv-confetti{
+  position:absolute;
+  top:-20px;
+  width:9px;
+  height:14px;
+  opacity:.9;
+  animation-name: annivFall;
+  animation-timing-function: linear;
+  animation-fill-mode: forwards;
+}
+@keyframes annivFall{
+  0%{ transform: translateY(0) rotate(0deg); opacity:1; }
+  100%{ transform: translateY(110vh) rotate(360deg); opacity:.6; }
+}
+
+.anniv-modal-backdrop{
+  position: fixed;
+  inset:0;
+  background: rgba(28,18,38,.55);
+  backdrop-filter: blur(3px);
+  z-index: 1000;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding: 20px;
+  animation: annivFadeIn .3s ease;
+}
+@keyframes annivFadeIn{ from{opacity:0;} to{opacity:1;} }
+
+.anniv-modal{
+  background: var(--white);
+  border-radius: var(--radius-lg);
+  max-width: 420px;
+  width:100%;
+  padding: 40px 34px 34px;
+  text-align:center;
+  box-shadow: var(--shadow-lg);
+  position:relative;
+  animation: annivPop .4s cubic-bezier(.2,1.4,.4,1);
+}
+@keyframes annivPop{
+  from{ transform: scale(.85); opacity:0; }
+  to{ transform: scale(1); opacity:1; }
+}
+.anniv-modal .emoji-row{ font-size:2.2rem; margin-bottom:10px; letter-spacing:6px; }
+.anniv-modal h3{ margin-bottom:10px; }
+.anniv-modal p{ margin-bottom:22px; }
+.anniv-modal-close{
+  position:absolute;
+  top:14px; right:16px;
+  background:none;
+  border:none;
+  font-size:1.3rem;
+  line-height:1;
+  color: var(--ink-soft);
+  padding:4px;
+}
+
 /* ---------- Utility ---------- */
 .mt-0{ margin-top:0; }
 .center{ text-align:center; }
